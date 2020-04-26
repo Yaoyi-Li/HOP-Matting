@@ -1,0 +1,62 @@
+version = "HOP-9x9-RI"
+dist = true
+fp16 = true
+
+[model]
+batch_size = 14
+imagenet_pretrain = true
+    [model.arch]
+    encoder = "resnet_localHOP_posEmb_encoder_29"
+    decoder = "res_localHOP_posEmb_decoder_22"
+    hop_ksize = 9
+
+[train]
+total_step = 3000
+warmup_step = 5000
+val_step = 1000
+# val_step = 100
+clip_grad = true
+G_lr = 6.4e-5
+# Uncomment to resume training
+# resume_checkpoint = "latest_model"
+# strict_resume = false
+# reset_lr = true
+# reset_step = true
+
+
+[data]
+train_fg = "/home/liyaoyi/dataset/Adobe/train/fg"
+train_alpha = "/home/liyaoyi/dataset/Adobe/train/alpha"
+train_bg = "/home/liyaoyi/dataset/coco_bg"
+test_merged = "/home/liyaoyi/dataset/Adobe/test/merged"
+test_alpha = "/home/liyaoyi/dataset/Adobe/test/alpha"
+test_trimap = "/home/liyaoyi/dataset/Adobe/test/trimap"
+workers = 8
+augmentation = true
+val_scale = "origin"
+random_interp = true
+
+[log]
+tensorboard_path = "./logs/tensorboard"
+tensorboard_step = 100
+tensorboard_image_step = 2000
+logging_path = "./logs/stdout"
+logging_step =  10
+logging_level = "INFO"
+checkpoint_path = "./checkpoints"
+checkpoint_step = 2000
+
+
+[test]
+merged = "/home/liyaoyi/dataset/Adobe/Combined_Dataset/Test_set/merged"
+alpha = "/home/liyaoyi/dataset/Adobe/Combined_Dataset/Test_set/alpha_copy"
+trimap = "/home/liyaoyi/dataset/Adobe/Combined_Dataset/Test_set/trimaps"
+scale = "origin"
+cpu = false
+batch_size = 1
+checkpoint = "HOP-9x9-RI"
+fast_eval = true
+# Uncomment to save predicted alpha
+# alpha_path = "prediction"
+# Uncomment to use testing time augmentation
+# TTA = true
