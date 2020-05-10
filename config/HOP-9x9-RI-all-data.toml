@@ -1,4 +1,4 @@
-version = "HOP-9x9-RI"
+version = "HOP-9x9-RI-all-data"
 dist = true
 fp16 = true
 
@@ -54,7 +54,7 @@ trimap = "/home/liyaoyi/dataset/Adobe/Combined_Dataset/Test_set/trimaps"
 scale = "origin"
 cpu = false
 batch_size = 1
-checkpoint = "HOP-9x9-RI"
+checkpoint = "HOP-9x9-RI-all-data"
 fast_eval = true
 # Uncomment to save predicted alpha
 alpha_path = "prediction"
