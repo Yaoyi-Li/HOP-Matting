@@ -112,9 +112,9 @@ if __name__ == '__main__':
     parser.add_argument('--config', type=str, default='config/HOP-9x9-RI-all-data.toml')
     parser.add_argument('--checkpoint', type=str, default='checkpoints/HOP-9x9-RI-all-data/HOP-9x9-RI-all-data.pth',
                         help="path of checkpoint")
-    parser.add_argument('--image-dir', type=str, default='demo/hops/img', help="input image dir")
-    parser.add_argument('--trimap-dir', type=str, default='demo/hops/trimap', help="input trimap dir")
-    parser.add_argument('--output', type=str, default='demo/hops/pred', help="output dir")
+    parser.add_argument('--image-dir', type=str, default='demo/alphamatting/input_lowres', help="input image dir")
+    parser.add_argument('--trimap-dir', type=str, default='demo/alphamatting/trimap_lowres/Trimap3/', help="input trimap dir")
+    parser.add_argument('--output', type=str, default='demo/alphamatting/pred/Trimap3/', help="output dir")
     parser.add_argument('--dilate_unknown', type=bool, default=False, help="dilate the unknown part in trimap to avoid some annotation mistake")
     parser.add_argument('--TTA', type=bool, default=False, help="testing time augmentation")
 
@@ -122,6 +122,8 @@ if __name__ == '__main__':
     args = parser.parse_args()
     with open(args.config) as f:
         utils.load_config(toml.load(f))
+        # larger global affinity graph for alphamatting.com, requires a little more GPU memory.
+        CONFIG.model.arch.global_hop_downsample = 1.
 
     # Check if toml config file is loaded
     if CONFIG.is_default:

@@ -3,20 +3,20 @@ dist = true
 fp16 = true
 
 [model]
-batch_size = 14
+batch_size = 12
 imagenet_pretrain = true
     [model.arch]
     encoder = "resnet_localHOP_posEmb_encoder_29"
     decoder = "res_localHOP_posEmb_decoder_22"
     hop_ksize = 9
+    batchnorm_eps = 1e-5
 
 [train]
-total_step = 3000
+total_step = 50000
 warmup_step = 5000
-val_step = 1000
-# val_step = 100
+val_step = 2000
 clip_grad = true
-G_lr = 6.4e-5
+G_lr = 6.4e-4
 # Uncomment to resume training
 # resume_checkpoint = "latest_model"
 # strict_resume = false

@@ -11,12 +11,11 @@ imagenet_pretrain = true
     hop_ksize = 9
 
 [train]
-total_step = 3000
+total_step = 200000
 warmup_step = 5000
-val_step = 1000
-# val_step = 100
+val_step = 2000
 clip_grad = true
-G_lr = 6.4e-5
+G_lr = 6.4e-4
 # Uncomment to resume training
 # resume_checkpoint = "latest_model"
 # strict_resume = false
